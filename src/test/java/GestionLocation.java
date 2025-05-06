@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin= {"pretty","json:target/json/results.json"},
-        features = {"src/test/java/features"}
+        features = {"src/test/resources/features"}
 
 )
 public class GestionLocation {

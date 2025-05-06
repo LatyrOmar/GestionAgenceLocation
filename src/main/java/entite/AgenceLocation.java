@@ -48,7 +48,7 @@ public class AgenceLocation {
         }
 
         if (!vehicule.isDisponible()) {
-            throw new IllegalStateException("Le véhicule avec l'immatriculation " + vehicule.getImmatriculation() + " a déjà été loué.");
+            throw new IllegalStateException("Véhicule déjà loué");
         }
 
         client.getVehiculesLoues().add(vehicule);
@@ -63,9 +63,10 @@ public class AgenceLocation {
             client.getVehiculesLoues().remove(vehicule);
             vehicule.setDisponible(true);
             //System.out.println("Le véhicule " + vehicule + " a été rendue par le client " + client);
-        }else {
-            System.out.println("Ce véhicule n'a pas été loué par ce client.");
-        }
+       }
+        //else {
+//            System.out.println("Ce véhicule n'a pas été loué par ce client.");
+//        }
 
     }
 
