@@ -1,5 +1,6 @@
 import entite.AgenceLocation;
 import entite.Client;
+import entite.Moto;
 import entite.Voiture;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,13 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GestionLocationStepDefinition {
     private Voiture voiture;
+    
     private Client client1;
     private Client client2;
     private Client client3;
     private AgenceLocation agenceLocation;
     private int nbJours;
+    private Moto moto;
     private Exception exception;
-
 
     @Given("Une voiture {string} {string} immatriculée {string} avec un tarif de {int} F \\/ j")
     public void une_voiture_immatriculée_avec_un_tarif_de_f_j(String marque, String modele, String immatriculation, int tarifJournalier) {
@@ -70,9 +72,13 @@ public class GestionLocationStepDefinition {
         client1 =new Client(1,nom,prenom,nom+""+prenom+"@gmail.com");
         agenceLocation = new AgenceLocation();
         agenceLocation.louerVehicule(client1,voiture,nbJours);
-        agenceLocation.retournerVehicule(client1,voiture);
+//        agenceLocation.retournerVehicule(client1,voiture);
     }
-
+    //    @Given("Un nouveau client {string} {string}")
+//    public void un_nouveau_client_(String prenom, String nom){
+//        client3 = new Client(5,nom,prenom,nom+""+prenom+"@gmail.com");
+//        agenceLocation.ajouterClient(client3);
+//    }
     @When("Le client retourne la voiture")
     public void le_client_retourne_la_voiture(){
 
@@ -82,6 +88,27 @@ public class GestionLocationStepDefinition {
     public void la_voiture_doit_etre_disponible_a_nouveau(){
         assertTrue(voiture.isDisponible());
     }
+// Scénario 4 : Réduction pour moto > 500 cm³
+    @Given("Une moto {string} {string} immatriculée {string} avec un tarif de {int} F\\/j et une cylindrée de {int} cm³")
+    public void une_moto_immatriculee_avec_un_tarif_de_et_une_cylindre_de_cm(String marque, String modele,String immatriculation, int tarifJournalier, int cylindre){
+        moto = new Moto(marque,modele,immatriculation,tarifJournalier,true,cylindre);
+        agenceLocation = new AgenceLocation();
+        agenceLocation.ajouterVehicule(moto);
+
+    }
+
+    @When("Le client loue la moto pour {int} jours")
+    public void le_client_loue_la_moto_pour_jours(int nbJours){
+        this.nbJours = nbJours;
+        agenceLocation.louerVehicule(client1,moto,nbJours);
+    }
+
+    @Then("Le coût total de la location doit être de {int} F \\(réduction appliquée)")
+    public void Le_coût_total_de_la_location_doit_être_de_f_reduction_appliquees(int coutApresReduction){
+
+        assertEquals(coutApresReduction,moto.calculerCout(nbJours));
+    }
+
 
 
 }

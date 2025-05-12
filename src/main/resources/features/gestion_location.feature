@@ -18,9 +18,9 @@ Feature: Gestion des locations de véhicules
     Given Une voiture "BMW" "X5" immatriculée "EE-789-FF" louée par "Fatou" "Ndoye"
     When Le client retourne la voiture
     Then La voiture doit être disponible à nouveau
-##Scénario 4 : Réduction pour moto > 500 cm³
-#  Scenario: Louer une moto de grosse cylindrée avec réduction
-#    Given Une moto "Yamaha" "MT-07" immatriculée "GG-321-HH" avec un tarif de 15000 F/j et une cylindrée de 600 cm³
-#    And Un client "Alioune" "Dieng"
-#    When Le client loue la moto pour 5 jours
-#    Then Le coût total de la location doit être de 67500 F (réduction appliquée)
+#Scénario 4 : Réduction pour moto > 500 cm³
+  Scenario: Louer une moto de grosse cylindrée avec réduction
+    Given Une moto "Yamaha" "MT-07" immatriculée "GG-321-HH" avec un tarif de 15000 F/j et une cylindrée de 600 cm³
+    And Un client "Alioune" "Dieng"
+    When Le client loue la moto pour 5 jours
+    Then Le coût total de la location doit être de 67500 F (réduction appliquée)

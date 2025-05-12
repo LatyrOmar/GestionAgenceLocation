@@ -53,7 +53,7 @@ public class AgenceLocation {
 
         client.getVehiculesLoues().add(vehicule);
         vehicule.setDisponible(false);
-       // System.out.println("Véhicule loué : " + vehicule);
+
 
         chiffreDaffaire.add(vehicule.calculerCout(nbJours));
     }
